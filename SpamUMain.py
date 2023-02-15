@@ -10,13 +10,20 @@ win.geometry("780x400")
 win.title("SpamU")
 
 
+
 def button_callback():
     print("Button click")
-    win.wait_visibility(win)
+    win.attributes('-zoomed', True)
     win.wm_attributes('-alpha', 0.3)
     win.attributes('-fullscreen', True)
-
     win.resizable(False, False)
+
+    # Create a Label and a Button widget
+    label = ttk.Label(win, text="Press Enter to Stop operation", font=('Century 17 bold'))
+    label.pack(ipadx=10)
+    win.bind('<Return>', lambda x: callback(label))
+    # Disable the Mouse Pointer
+    win.config(cursor="none")
 
 
 frame_1 = customtkinter.CTkFrame(master=win)
@@ -42,16 +49,17 @@ checkbox_1 = customtkinter.CTkCheckBox(master=frame_1)
 checkbox_1.pack(pady=10, padx=10)
 
 
-def callback(event):
-    win.destroy()
+def callback(label):
+    win.attributes('-zoomed', False)
+    win.wm_attributes('-alpha', 1)
+    win.attributes('-fullscreen', False)
+    win.geometry("780x400")
+    win.resizable(True, True)
 
+    win.config(cursor="arrow")
+    label.destroy()
+    # win.destroy()
 
-# Create a Label and a Button widget
-label = ttk.Label(win, text="Press Enter to Stop operation the Window", font=('Century 17 bold'))
-label.pack(ipadx=10)
-win.bind('<Return>', callback)
-# Disable the Mouse Pointer
-win.config(cursor="none")
 
 # Create transparent window
 
