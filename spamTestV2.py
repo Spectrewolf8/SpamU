@@ -4,6 +4,7 @@ import time
 
 # limit = input("Enter limit:")
 # message = input("Enter message:")
+message2 = "Testing text abc"
 message = """Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
@@ -42,22 +43,27 @@ Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?"""
+
 i = 0
 time.sleep(15)
 
-limit = 500
+limit = 50
 initalTime = time.time()
+
+clipboard.copy(message2)
+
 while i < limit:
     # pt.write(message)
-    #pt.typewrite(message)
-    clipboard.copy(message)
+    # pt.typewrite(message)
+
     pt.hotkey('ctrl', 'v')
-    clipboard.copy('')
-    # the message is written where -
-    # the cursor belongs
 
     pt.press("enter")
     print("spammed", i, "th message")
+    time.sleep(0.5)
+
+    # the message is written where -
+    # the cursor belongs
 
     i += 1
 
