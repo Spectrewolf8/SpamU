@@ -4,7 +4,7 @@ import time
 
 # limit = input("Enter limit:")
 # message = input("Enter message:")
-message2 = "y"
+message2 = "good spam desu desu"
 message = """Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
 Test paragraph abcdefghijklmnopqrstuvwxyz1234567890!$%^&&****((((()_+{}[]"'||.>,</?
@@ -48,10 +48,10 @@ i = 1
 
 waitTimeTillStaringSpam = 15
 
-numberOfTextsToSend = 10
+numberOfTextsToSend = 500
 
 
-delayTimeBetweenEachTextSent = 1
+delayTimeBetweenEachTextSent = 0
 
 time.sleep(waitTimeTillStaringSpam)
 initialTime = time.time()
