@@ -21,13 +21,13 @@ class Spammer:
         # but no authorization protocol specified\n' on linux
         print("starting spam in", self.waitTimeTillStartingSpam)
         time.sleep(self.waitTimeTillStartingSpam)
-        copyToClipboard(message)
+        # copyToClipboard(message)
         initialTime = time.time()
         i = 1
         while i <= self.numberOfTextsToSend:
-            pt.hotkey('ctrl', 'v')
+            # pt.hotkey('ctrl', 'v')
 
-            pt.press("enter")
+            # pt.press("enter")
             print("spammed", i, "th message")
             time.sleep(self.delayTimeBetweenEachTextSent)
             i += 1
