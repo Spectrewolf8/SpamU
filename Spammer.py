@@ -32,7 +32,6 @@ class Spammer:
             statusBox.delete("0.0", END)  # clearing status bar
             statusBox.insert("0.0", "spammed " + str(i) + "th message")  # printing a new message in status bar
             win.update()
-
             time.sleep(self.delayTimeBetweenEachTextSent)
             i += 1
             finalTime = time.time()
