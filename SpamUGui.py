@@ -148,7 +148,6 @@ def countdown(t):
 def exitOnEnter_callback(label, spamObject):
     win.attributes('-zoomed', False)
     win.wm_attributes('-alpha', 1)
-    win.attributes('-fullscreen', False)
     win.geometry("620x550")
     win.resizable(True, True)
     win.config(cursor="arrow")
