@@ -3,14 +3,16 @@ import customtkinter
 import time
 import os
 
+import keyboard
+
 os.system("xhost +")  # needs to be done before importing pyautogui
-from Spammer import Spammer as spam
+from Spammer import Spammer
 
 customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "green", "dark-blue"
 
 win = customtkinter.CTk()
-win.geometry("620x500")
+win.geometry("620x550")
 win.title("SpamU")
 
 # main frame
@@ -20,7 +22,7 @@ frame_1.pack(pady=15, padx=60, fill="both", expand=True)
 # Text to spam text box
 spamTextBox = customtkinter.CTkTextbox(master=frame_1, width=200, height=70)
 spamTextBox.place(x=80, y=50)
-spamTextBox.insert("0.0", "Your Text Comes Here!\n\n\n\n")
+spamTextBox.insert("0.0", "Your Text Comes Here!")
 # Text to spam text box label
 spamTextBoxLabel = customtkinter.CTkLabel(master=frame_1, text="Text to Spam:",
                                           font=customtkinter.CTkFont(size=14, weight="bold"),
@@ -29,8 +31,8 @@ spamTextBoxLabel.place(x=80, y=20)
 
 # Status Text Box
 statusTextBox = customtkinter.CTkTextbox(master=frame_1, width=200, height=30)
-statusTextBox.place(x=140, y=430)
-statusTextBox.insert("0.0", "Status comes here\n")
+statusTextBox.place(x=80, y=460)
+statusTextBox.insert("0.0", "Operation status comes here\n")
 # Status label
 statusLabel = customtkinter.CTkLabel(master=frame_1, text="Status:",
                                      font=customtkinter.CTkFont(size=14, weight="bold"),
@@ -86,18 +88,40 @@ safeModeCheckBox.select()
 # start spamming button callback
 def startSpammingButton_callback():
     print("Spam Started")
-    countdown(50)
-    win.attributes('-zoomed', True)
-    win.wm_attributes('-alpha', 0.3)
-    win.attributes('-fullscreen', True)
-    win.resizable(False, False)
 
+    waitTimeTillStartingSpamTime = waitTimeTillStartingSpamEntryBox.get()
+    numberOfTextsToSendNumber = numberOfTextsToSendEntryBox.get()
+    delayTimeBetweenEachTextSentTime = delayTimeBetweenEachTextSentEntryBox.get()
+    if waitTimeTillStartingSpamTime == '':
+        waitTimeTillStartingSpamTime = '15'
+    if numberOfTextsToSendNumber == '':
+        numberOfTextsToSendNumber = '50'
+    if delayTimeBetweenEachTextSentTime == '':
+        delayTimeBetweenEachTextSentTime = '1'
+
+    countdown(int(waitTimeTillStartingSpamTime))
+    time.sleep(1)
+
+    win.wm_attributes('-alpha', 0.7)
+    win.attributes('-zoomed', True)
+    # win.attributes('-fullscreen', True)
+    win.resizable(False, False)
+    win.update()
+    print("Spammer created")
+    # creating spammer
+    spammer = Spammer(int(numberOfTextsToSendNumber), float(delayTimeBetweenEachTextSentTime))
     # Create a Label and a Button widget
-    pressEnterToExitLabel = ttk.Label(win, text="Press Enter to Stop operation", font=('Century 17 bold'))
+    pressEnterToExitLabel = ttk.Label(win, text="Press {ALT + ENTER} to Stop operation", font=('Century 22 bold'))
     pressEnterToExitLabel.pack(ipadx=10)
-    win.bind('<Return>', lambda x: exitOnEnter_callback(pressEnterToExitLabel))
+    # win.bind('<Return>', lambda x: exitOnEnter_callback(pressEnterToExitLabel, spammer))
     # Disable the Mouse Pointer
     win.config(cursor="none")
+    print("label created")
+    win.update()
+    # press ctrl+shift+z to print "Hotkey Detected"
+    keyboard.add_hotkey('alt + enter', exitOnEnter_callback, args=(pressEnterToExitLabel, spammer))
+    # keyboard.wait('shift + enter')
+    spammer.startOperation(spamTextBox.get("1.0", END), statusTextBox, win)
 
 
 # define the countdown func.
@@ -105,24 +129,25 @@ def countdown(t):
     while t:
         mins, secs = divmod(t, 60)
         timer = '{:02d}:{:02d}'.format(mins, secs)
-        print(timer, end="\r")
+        print(timer)
         time.sleep(1)
         t -= 1
-        print(t)
+        # print(t)
         statusTextBox.delete("0.0", END)
-        statusTextBox.insert("0.0", "Stating operation in: " + str(t))
+        statusTextBox.insert("0.0", "Stating operation in: " + str(timer))
         win.update()
 
 
-def exitOnEnter_callback(label):
+def exitOnEnter_callback(label, spamObject):
     win.attributes('-zoomed', False)
     win.wm_attributes('-alpha', 1)
     win.attributes('-fullscreen', False)
-    win.geometry("620x500")
+    win.geometry("620x550")
     win.resizable(True, True)
-
     win.config(cursor="arrow")
+    spamObject.breakOperationCall()
     label.destroy()
+    win.update()
 
 
 # start spamming button
@@ -145,8 +170,8 @@ spamProgressBarLabel.place(x=80, y=370)
 # guide label
 guideLabel = customtkinter.CTkLabel(master=frame_1,
                                     text="Defaults:\n  delayBeforeStart - 15s\n  numberOfTextsToSpam - "
-                                         "50\n  delayBetweenEachText - 1s\n\n\n\n\n\n\n\n⚠ Safe mode: disable "
-                                         "interactions till"
+                                         "50\n  delayBetweenEachText - 1s\n\n\n\n\n\n⚠ Safe mode: disable "
+                                         "interactions till "
                                          "operation completion ("
                                          "RECOMMENDED)\n\n⚠ Warning:\nSelect the desired text field to Spam "
                                          "immediately after"
