@@ -15,22 +15,22 @@ class Spammer:
     def breakOperationCall(self):
         self.breakOperation = True
 
-    def startOperation(self, message, statusBox, win):
+    def startOperation(self, message, statusBox, win, spamProgressBar):
         os.system("xhost +")
         # to workaround Xlib.error.DisplayConnectionError: Can't connect to display ":0": b'Authorization required,
         # but no authorization protocol specified\n' on linux
-
+        spamProgressBar.set(0)  # reset progress bar if spam is ran again
         copyToClipboard((str(message)).strip())
         initialTime = time.time()
         i = 1
         while i <= self.numberOfTextsToSend:
             if self.breakOperation:
                 break
-            pt.hotkey('ctrl', 'v')
-            pt.press("enter")
-            print("spammed", i, "th message")
-            statusBox.delete("0.0", END)
-            statusBox.insert("0.0", "spammed " + str(i) + "th message")
+            pt.hotkey('ctrl', 'v')  # pasting the message to spam
+            pt.press("enter")  # pressing enter to send the message to spam
+            spamProgressBar.set(((i / self.numberOfTextsToSend) * 100) / 100)  # setting progress bar progress
+            statusBox.delete("0.0", END)  # clearing status bar
+            statusBox.insert("0.0", "spammed " + str(i) + "th message")  # printing a new message in status bar
             win.update()
 
             time.sleep(self.delayTimeBetweenEachTextSent)
@@ -39,5 +39,5 @@ class Spammer:
 
         print()
         statusBox.delete("0.0", END)
-        statusBox.insert("0.0", "spammed " + str(i) + " messages in " + str(finalTime - initialTime))
+        statusBox.insert("0.0", "spammed " + str(i) + " messages in " + str(round(finalTime - initialTime)) + "s")
         win.update()
