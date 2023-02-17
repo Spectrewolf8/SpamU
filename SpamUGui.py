@@ -1,4 +1,4 @@
-from tkinter import ttk, END
+from tkinter import ttk, END, PhotoImage
 import customtkinter
 import time
 import os
@@ -14,6 +14,8 @@ customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "gr
 win = customtkinter.CTk()
 win.geometry("620x550")
 win.title("SpamU")
+photo = PhotoImage(file="swaggy-trollface-man.png")
+win.iconphoto(False, photo)
 
 # main frame
 frame_1 = customtkinter.CTkFrame(master=win)
