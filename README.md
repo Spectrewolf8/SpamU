@@ -1,5 +1,5 @@
 # SpamU
-SpamU is a Universal Spammer for Linux made in python, with the ability to spam any text field. SpamU has ability to spam 50 messages in 10 seconds
+SpamU is a Universal Spammer for Linux made in python, with the ability to spam any text field. SpamU has ability to spam 50 messages in 10 seconds.
 
 ![image](https://user-images.githubusercontent.com/69973760/219847529-a11f2433-e9f1-4a24-92f4-d3d1123a2078.png)
 
