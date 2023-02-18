@@ -9,7 +9,7 @@ SpamU is a Universal Spammer for Linux made in python, with the ability to spam 
 ## Usage
 Your text to spam goes in [Text to Spam] text box.
 
-Moreover, You can decide the delay before starting spam(activates after [Star Spam!] button is pressed), number of messages to spam and delay between each text spammed. You can also choose safe mode to prevent shift of focus between windows reducing the risk to spam any unintneded window.
+Moreover, You can decide the delay before starting spam(activates after [Star Spam!] button is pressed), number of messages to spam and delay between each text spammed. You can also choose safe mode to prevent shift of focus between windows reducing the risk to spam any unintneded window. You can press **ALT + ENTER** after the start of spam to stop spamming further.
 
 Default values are used when any parameter text field is left empty.
 
