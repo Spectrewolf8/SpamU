@@ -33,3 +33,8 @@ pip install tkinter customtkinter os time pyautogui pyperclip keyboard
 ```
 
 **In order to use keyboard module you must provide super user privileges** i.e You use Pycharm, you'll need to type ```sudo pycharm``` in terminal
+
+###
+
+### SpamU for Windows
+SpamU for Windows can be found [here](https://github.com/Spectrewolf8/SpamU-for-Windows)
