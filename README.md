@@ -17,5 +17,19 @@ Default values are used when any parameter text field is left empty.
 
 
 ## Required Packages/Modules
-Required packages can be accquired by using:
-```pip install tkinter customtkinter os time pyautogui pyperclip keyboard```
+Required packages are as:
+
+- tkinter
+- customtkinter
+- os
+- time
+- pyautogui
+- pyperclip
+- keyboard
+
+Required packages can be accquired by using this command:
+```
+pip install tkinter customtkinter os time pyautogui pyperclip keyboard
+```
+
+**In order to use keyboard module you must provide super user privileges** i.e You use Pycharm, you'll need to type ```sudo pycharm``` in terminal
